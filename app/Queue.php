@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Queue extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name','queue_time'];
 }

@@ -13,14 +13,15 @@ class TestJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $queue_time;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($queue_time)
     {
-        //
+        $this->queue_time = $queue_time;
     }
 
     /**
@@ -30,6 +31,6 @@ class TestJob implements ShouldQueue
      */
     public function handle()
     {
-        Queue::create(['name'=>'test']);
+        Queue::create(['name'=>'test','queue_time'=>$this->queue_time]);
     }
 }
