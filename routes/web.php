@@ -19,3 +19,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','QueueController@index');
 Route::post('/setQueue','QueueController@setQueue');
+
+Route::prefix('jobs')->group(function () {
+    Route::get('/recent-jobs','JobController@index');
+    Route::get('/failed','JobController@failed_jobs');
+});
+
+
+Route::prefix('monitor-jobs')->group(function () {
+    Route::queueMonitor();
+});

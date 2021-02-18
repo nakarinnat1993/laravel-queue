@@ -8,20 +8,22 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Queue;
+use romanzipp\QueueMonitor\Traits\IsMonitored;
 
 class TestJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use IsMonitored;
 
-    public $queue_time;
+    public $name;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($queue_time)
+    public function __construct($name)
     {
-        $this->queue_time = $queue_time;
+        $this->name = $name;
     }
 
     /**
@@ -31,6 +33,6 @@ class TestJob implements ShouldQueue
      */
     public function handle()
     {
-        Queue::create(['name'=>'test','queue_time'=>$this->queue_time]);
+        Queue::create(['name'=>$this->name]);
     }
 }

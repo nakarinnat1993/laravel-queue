@@ -21,9 +21,18 @@ class QueueController extends Controller
     public function setQueue(Request $request)
     {
         // dd(Carbon::parse($request->queue_time));
-        $test = (new \App\Jobs\TestJob($request->queue_time))->delay(Carbon::parse($request->queue_time));
+        $test = (new \App\Jobs\TestJob($request->name))->delay(Carbon::parse($request->queue_time));
         dispatch($test);
 
-        return redirect('/')->with('success','Insert Queue already '.Carbon::parse($request->queue_time)->format('d-m-y H:i:s'));
+        return redirect('/')->with('success','Insert Queue '.Carbon::parse($request->queue_time)->format('d-m-y H:i:s'));
     }
+
+    public function getQueue()
+    {
+        // dd(Carbon::parse($request->queue_time));
+        dd(Queue::all());
+
+        // return redirect('/')->with('success','Insert Queue already '.Carbon::parse($request->queue_time)->format('d-m-y H:i:s'));
+    }
+
 }

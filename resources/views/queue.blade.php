@@ -20,6 +20,7 @@
 
     <form action="/setQueue" method="POST">
         @csrf
+        Name : <input type="text" name="name" required>
         Date Time Queue : <input type="datetime-local" name="queue_time" required>
         <button type="submit">Add</button>
     </form>
